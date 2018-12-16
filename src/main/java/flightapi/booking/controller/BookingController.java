@@ -6,14 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import flightapi.booking.model.Booking;
+import flightapi.booking.repository.BookingRepository;
 
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
 
-    @GetMapping
+    @GetMapping("/{booking_id}")
     public Booking getBookingByBookingId(@PathVariable("booking_id") String bookingId) {
 
-        return new Booking(bookingId);
+        BookingRepository repository = new BookingRepository();
+
+        return repository.findBookingById(bookingId);
     }
 }
