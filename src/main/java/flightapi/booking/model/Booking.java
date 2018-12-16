@@ -4,6 +4,7 @@ public class Booking {
 
     private final String id;
     private Passenger passenger;
+    private Flight flight;
 
     public Booking(String id) {
         this.id = id;
@@ -19,5 +20,13 @@ public class Booking {
 
     public Passenger getPassenger() {
         return this.passenger;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    public Flight getFlight() {
+        return this.flight;
     }
 }
