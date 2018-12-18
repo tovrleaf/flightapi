@@ -3,20 +3,21 @@ package flightapi.booking.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import org.hibernate.annotations.GenericGenerator;
-import java.util.UUID;
 
 @Entity
 public class Passenger {
 
     @Id
-    @Column(columnDefinition = "BINARY(16)")
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @NotNull
+    @Column(unique = true)
+    private String passengerId;
 
     @NotNull
     private String firstName;
@@ -30,11 +31,16 @@ public class Passenger {
     protected Passenger() {
     }
 
-    public Passenger(String firstName, String lastName, String email) {
+    public Passenger(String passengerId, String firstName, String lastName, String email) {
 
+        this.passengerId = passengerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public String getPassengerId() {
+        return this.passengerId;
     }
 
     public String getFirstName() {
