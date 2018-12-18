@@ -1,30 +1,33 @@
 package flightapi.booking.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Booking {
 
+    // this should be replaced with custom generator
+    // to create 4-6 character long codes
     @Id
-    @Column(columnDefinition = "BINARY(16)")
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "CHAR(32)")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
     private String id;
 
     @ManyToOne
-    @NotEmpty
+    @NotNull
     private Passenger passenger;
 
     @OneToOne
-    @NotEmpty
+    @NotNull
     private Flight flight;
 
     protected Booking() {
